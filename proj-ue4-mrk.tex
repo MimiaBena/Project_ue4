@@ -1,0 +1,378 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={proj-ue4},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\newcommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{proj-ue4}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+\subsection{1-Introduction :}\label{introduction}
+
+La fouille de données (data mining) désigne l'analyse de données depuis
+différentes perspectives et le fait de transformer ces données en
+informations utiles, alors c'est une discipline qui permet de faire un
+lien entre les statistiques et les technologies de l'information (base
+de données, intelligence artificielle, apprentissage automatique
+(machine learning). Au début, la fouille de données était utilisée dans
+la gestion de la relation client, pour mieux les fidéliser et leur
+proposer des produits qui leur sont adaptés. Aujourd'hui, la recherche
+d'informations dans les grandes bases de données médicales ou de santé
+se développe de plus en plus . Les outils de collecte automatique des
+données et bases de données permettent de stocker dans des entrepôts
+d'énormes masses de données. La fouille de données et les entrepôts
+permettent l'extraction de connaissances. \#\# 2- Matériels et méthodes
+\#\#\# Outils utilisées 1.1.1- R et Rstudio R est un logiciel permettant
+de faire des analyses statistiques et permet la production de graphiques
+évolués. C'est aussi un langage de programmation,. Fonctionnant en
+console, son utilisation n'est pas aisée. L'interface Rstudio permet une
+utilisation de R les fonctionnalités de R plus facilement. 1.1.2-
+Resources cartographiques Pour pouvoir créer une cartographie sur R, il
+nous a fallu importer des fonds de cartes.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(markdown)}
+\KeywordTok{library}\NormalTok{(shiny)}
+\KeywordTok{options}\NormalTok{(}\DataTypeTok{repos =} \KeywordTok{c}\NormalTok{(}\DataTypeTok{CRAN =} \StringTok{"http://cran.rstudio.com"}\NormalTok{))}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(sp)}
+\KeywordTok{library}\NormalTok{(rgdal)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## rgdal: version: 1.3-6, (SVN revision 773)
+##  Geospatial Data Abstraction Library extensions to R successfully loaded
+##  Loaded GDAL runtime: GDAL 2.2.3, released 2017/11/20
+##  Path to GDAL shared files: C:/Program Files/R/R-3.5.2/library/rgdal/gdal
+##  GDAL binary built with GEOS: TRUE 
+##  Loaded PROJ.4 runtime: Rel. 4.9.3, 15 August 2016, [PJ_VERSION: 493]
+##  Path to PROJ.4 shared files: C:/Program Files/R/R-3.5.2/library/rgdal/proj
+##  Linking to sp version: 1.3-1
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyr)}
+\KeywordTok{library}\NormalTok{(mapproj)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Loading required package: maps
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(maps)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#Téléchargements des données}
+\NormalTok{radon <-}\StringTok{ 'C:/Users/Mimia/Pictures/Documents/projet-ue4/radon.csv'}
+\NormalTok{code_postal <-}\StringTok{ 'C:/Users/Mimia/Pictures/Documents/projet-ue4/code-postal-code-insee-2015.csv'}
+
+\NormalTok{catalogue_radon <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(radon, }\DataTypeTok{sep=}\StringTok{";"}\NormalTok{,}\DataTypeTok{encoding=}\StringTok{'UTF-8'}\NormalTok{)}
+\NormalTok{catalogue_code <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(code_postal, }\DataTypeTok{sep=}\StringTok{";"}\NormalTok{,}\DataTypeTok{encoding=}\StringTok{'UTF-8'}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{departements<-}\StringTok{ }\KeywordTok{readOGR}\NormalTok{(}\StringTok{"C:/Users/Mimia/Pictures/Documents/projet-ue4/DEPARTEMENT.shp"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## OGR data source with driver: ESRI Shapefile 
+## Source: "C:\Users\Mimia\Pictures\Documents\projet-ue4\DEPARTEMENT.shp", layer: "DEPARTEMENT"
+## with 96 features
+## It has 11 fields
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \KeywordTok{summary}\NormalTok{(departements)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## Object of class SpatialPolygonsDataFrame
+## Coordinates:
+##         min     max
+## x   99217.1 1242417
+## y 6049646.3 7110480
+## Is projected: TRUE 
+## proj4string :
+## [+proj=lcc +lat_1=44 +lat_2=49 +lat_0=46.5 +lon_0=3 +x_0=700000
+## +y_0=6600000 +ellps=GRS80 +units=m +no_defs]
+## Data attributes:
+##                     ID_GEOFLA    CODE_DEPT                     NOM_DEPT 
+##  DEPARTEM0000000000000001: 1   01     : 1   AIN                    : 1  
+##  DEPARTEM0000000000000002: 1   02     : 1   AISNE                  : 1  
+##  DEPARTEM0000000000000003: 1   03     : 1   ALLIER                 : 1  
+##  DEPARTEM0000000000000004: 1   04     : 1   ALPES-DE-HAUTE-PROVENCE: 1  
+##  DEPARTEM0000000000000005: 1   05     : 1   ALPES-MARITIMES        : 1  
+##  DEPARTEM0000000000000006: 1   06     : 1   ARDECHE                : 1  
+##  (Other)                 :90   (Other):90   (Other)                :90  
+##     CODE_CHF     NOM_CHF     X_CHF_LIEU        Y_CHF_LIEU     
+##  001    : 2   AGEN   : 1   Min.   : 171326   Min.   :6108968  
+##  004    : 2   AJACCIO: 1   1st Qu.: 553177   1st Qu.:6401238  
+##  007    : 2   ALBI   : 1   Median : 658409   Median :6631771  
+##  010    : 2   ALENCON: 1   Mean   : 684049   Mean   :6609885  
+##  033    : 2   AMIENS : 1   3rd Qu.: 846156   3rd Qu.:6820420  
+##  085    : 2   ANGERS : 1   Max.   :1228512   Max.   :7059443  
+##  (Other):84   (Other):90                                      
+##    X_CENTROID        Y_CENTROID         CODE_REG 
+##  Min.   : 115669   Min.   :6050394   76     :13  
+##  1st Qu.: 544294   1st Qu.:6398674   75     :12  
+##  Median : 659892   Median :6639324   84     :12  
+##  Mean   : 681127   Mean   :6611276   44     :10  
+##  3rd Qu.: 838334   3rd Qu.:6834668   11     : 8  
+##  Max.   :1225168   Max.   :7046488   27     : 8  
+##                                      (Other):33  
+##                                 NOM_REG  
+##  LANGUEDOC-ROUSSILLON-MIDI-PYRENEES :13  
+##  AQUITAINE-LIMOUSIN-POITOU-CHARENTES:12  
+##  AUVERGNE-RHONE-ALPES               :12  
+##  ALSACE-CHAMPAGNE-ARDENNE-LORRAINE  :10  
+##  BOURGOGNE-FRANCHE-COMTE            : 8  
+##  ILE-DE-FRANCE                      : 8  
+##  (Other)                            :33
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# fusionne les data frames x et y par la colonne name.}
+\NormalTok{radon_code <-}\KeywordTok{merge}\NormalTok{(catalogue_radon, catalogue_code, }\DataTypeTok{by =}\StringTok{"insee_com"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{#créer les 2coordonnées}
+\NormalTok{radon_code<-}\StringTok{  }\NormalTok{radon_code  }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{separate}\NormalTok{(}\DataTypeTok{col =} \StringTok{"coordonnees_gps"}\NormalTok{,}
+           \DataTypeTok{into =} \KeywordTok{paste0}\NormalTok{(}\StringTok{"coordonnees_gps"}\NormalTok{,}\DecValTok{1}\OperatorTok{:}\DecValTok{2}\NormalTok{), }\DataTypeTok{sep =} \StringTok{","}\NormalTok{,}
+           \DataTypeTok{extra =} \StringTok{"merge"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{## Sélection de certaines colonnes}
+\NormalTok{radon_code <-}\StringTok{ }\NormalTok{radon_code }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(insee_com,nom_comm, nom_dept, }
+\NormalTok{                            classe_potentiel,coordonnees_gps1,coordonnees_gps2) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unique}\NormalTok{()}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{## Jointure avec le fond de carte pour obtenir les nom de pays}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{      test<-}\KeywordTok{match}\NormalTok{(departements}\OperatorTok{$}\NormalTok{NOM_COM,radon_code}\OperatorTok{$}\NormalTok{nom_comm)}
+\NormalTok{      couleurs<-radon_code}\OperatorTok{$}\NormalTok{classe_potentiel[test]}
+      
+\NormalTok{      getColor <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(test) \{}
+        \KeywordTok{sapply}\NormalTok{(test}\OperatorTok{$}\NormalTok{classe_potentiel, }\ControlFlowTok{function}\NormalTok{(classe_potentiel) \{}
+          \ControlFlowTok{if}\NormalTok{(classe_potentiel}\OperatorTok{==}\StringTok{ }\DecValTok{1}\NormalTok{) \{}
+            \StringTok{"green"}
+\NormalTok{          \} }\ControlFlowTok{else} \ControlFlowTok{if}\NormalTok{(classe_potentiel }\OperatorTok{==}\DecValTok{2}\NormalTok{) \{}
+            \StringTok{"orange"}
+\NormalTok{          \} }\ControlFlowTok{else}\NormalTok{ \{}
+            \StringTok{"red"}
+\NormalTok{          \} \})}
+\NormalTok{      \}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{ui <-}\StringTok{ }\KeywordTok{fluidPage}\NormalTok{(}
+        \KeywordTok{titlePanel}\NormalTok{(}\StringTok{"app"}\NormalTok{),}
+        \KeywordTok{sidebarLayout}\NormalTok{(}
+          \KeywordTok{sidebarPanel}\NormalTok{(}
+            \KeywordTok{fluidRow}\NormalTok{(}\KeywordTok{selectInput}\NormalTok{(}\StringTok{"select"}\NormalTok{,}\StringTok{"select a snp"}\NormalTok{,}\DataTypeTok{choices =} \DecValTok{1}\NormalTok{)}
+\NormalTok{            )}
+\NormalTok{          ),}
+          \KeywordTok{mainPanel}\NormalTok{( }\KeywordTok{plotOutput}\NormalTok{(}\StringTok{"map"}\NormalTok{))}
+\NormalTok{        )}
+\NormalTok{      )}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Server logic ----}
+\NormalTok{      server <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(input, output) \{}
+\NormalTok{        output}\OperatorTok{$}\NormalTok{map <-}\StringTok{ }\KeywordTok{renderPlot}\NormalTok{(\{}
+          \KeywordTok{plot}\NormalTok{(departements, }\DataTypeTok{fill=}\OtherTok{TRUE}\NormalTok{,}\DataTypeTok{col=}\KeywordTok{getColor}\NormalTok{(radon_code))}
+\NormalTok{        \})}
+\NormalTok{      \}}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+ \CommentTok{# Run app ----}
+      \KeywordTok{shinyApp}\NormalTok{(ui, server)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## PhantomJS not found. You can install it with webshot::install_phantomjs(). If it is installed, please make sure the phantomjs executable can be found via the PATH variable.
+\end{verbatim}
+
+Shiny applications not supported in static R Markdown documents
+
+
+\end{document}
