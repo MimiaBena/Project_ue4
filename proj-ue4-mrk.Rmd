@@ -359,6 +359,16 @@ for (x in 1:60){region<-calcul_popu[x,2]
 stone.stat(calcul_popu, region=region, lambda=1)
 test <- stone.test(observed~offset(log(expected)), calcul_popu, model="poisson", R=99,
            region=region, lambda=1)}
+# compute Moran statistics
+col.W <- nb2listw(ncCR85.nb, zero.policy=TRUE)
+calcul_popu1<-data.frame(Observed=calcul_popu$observed)
+calcul_popu1<-cbind(calcul_popu1, Expected=calcul_popu$POPULATION*sum(calcul_popu$observed)/sum(calcul_popu$POPULATION))
+                    
+moranI.stat(data=calcul_popu1, listw=col.W, n=length(ncCR85.nb), S0=Szero(col.W) )
+moranI.stat(data=calcul_popu1, applyto="residuals", listw=col.W, n=length(ncCR85.nb),
+            S0=Szero(col.W) )
+moranI.test(Observed~offset(log(Expected)), calcul_popu1, model="poisson", R=99,
+            listw=col.W, n=length(ncCR85.nb), S0=Szero(col.W) )
 ```
 
 les données utilisées dans les calculs de la correlation   sont extraites du fichier "evenement.csv" qui contient le nombre de cas dans chaque departement ,fusionné à la fois avec le fichier "code-postal-code-insee-2015.csv" qui contient les données de localisation géographique et la population dans chaque département et le fichier "dechets-declares-au-31-12-2015.csv" pour calculer  l'activité en Bq  dans chaque departement ,a fin de construire le fichier "calcul_popu" dont les données :
